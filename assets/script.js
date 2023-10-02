@@ -17,7 +17,7 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
-// constante
+
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
 const bannerImg = document.querySelector('.banner-img');
@@ -27,7 +27,7 @@ const dots = document.querySelector(".dots");
 // Initialisation positionSlide variable
 let positionSlide = 0;
 
-function generateDots() {
+function gestionDots() {
 	// boucle parcourir slides
 	for (i = 0; i < slides.length; i++) {
 		// Créer balise div a chaque passage du i
@@ -45,7 +45,7 @@ function generateDots() {
 	}
 }
 //lancement de la fonction dots
-generateDots();
+gestionDots();
 // recupération nombre Dots
 const dotsNbr = document.querySelectorAll('.dot');
 
@@ -56,30 +56,30 @@ arrow_left.addEventListener("click", function () {
 	positionSlide -= 1;
 	// Si position slide négatif
 	if (positionSlide === -1) {
-		//On met le position slide au dernier element
+		//On rémet le position slide au dernier element
 		positionSlide = slides.length - 1;
 	}
-	//Update des points et des slides
-	updateDot();
-	updateSlide();
+	//aficher des points et des slides
+	aficherDot();
+	aficherSlide();
 });
 // Ajout de l'event click pour la flèche droite
 arrow_right.addEventListener("click", function () {
 	console.log("Droite");
-	// Incrémentation du currentSlide
+	// Incrémentation du positionSlide
 	positionSlide ++;
-	//Si currentSlide supérieur aux nombres de points
+	//Si positionSlide supérieur aux nombres de points
 	if (positionSlide >= dotsNbr.length) {
 		//Retour à 0
 		positionSlide = 0
 	}
-	//update des dots et slides
-	updateDot();
-	updateSlide();
+	//aficher des dots et slides
+	aficherDot();
+	aficherSlide();
 });
 
 
-function updateDot() {
+function aficherDot() {
 	//Récupération du dot selected
 	const selected = document.querySelector('.dot_selected');
 	// retirer la class a ce dots
@@ -88,7 +88,7 @@ function updateDot() {
 	dotsNbr[positionSlide].classList.add('dot_selected');
 }
 
-function updateSlide() {
+function aficherSlide() {
 	// Mise a jour de l'image via les assets
 	bannerImg.src = `./assets/images/slideshow/${slides[positionSlide].image}`;
 	// Mise a jour du code HTML via le tagLine au lieu de innerText qui lui modifie le text d'une balise
